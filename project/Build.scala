@@ -51,14 +51,12 @@ object ApplicationBuild extends Build {
         else Some("releases" at nexus + "content/repositories/releases")
     },
 
-    // Maven central cannot allow other repos.  We're ok here because the artifacts we
-    // we use externally are *optional* dependencies.
     pomIncludeRepository := {
       x => true
     },
     licenses += ("MIT" -> url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("http://ciroque-x.net/")),
-    scmInfo := Some(ScmInfo(url("http://ciroque-x.net"), "git://github.com/ciroque/securesocial-mongodb-serservice.git")),
+    scmInfo := Some(ScmInfo(url("http://ciroque-x.net"), "https://github.com/ciroque/securesocial-mongodb-userservice.git")),
 
     // Maven central wants some extra metadata to keep things 'clean'.
     pomExtra := (
