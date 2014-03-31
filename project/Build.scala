@@ -27,14 +27,21 @@ import sbt.Keys._
 import sbt.ScmInfo
 import scala.Some
 
+
 object ApplicationBuild extends Build {
 
   val appName = "securesocial-mongodb-userservice"
-  val appVersion = "1.0-SNAPSHOT"
+  val appVersion = "1.1-SNAPSHOT"
+  val appHomepage = "https://github.com/ciroque/securesocial-mongodb-userservice.git"
 
   val appDependencies = Seq(
     "ws.securesocial" %% "securesocial" % "2.1.3"
     , "org.reactivemongo" %% "reactivemongo" % "0.10.0" exclude("org.scala-stm", "scala-stm_2.10.0")
+    , "org.ciroque" %% "core-data" % "1.0-SNAPSHOT"
+  )
+
+  val main = play.Project(appName, appVersion, appDependencies).settings(
+    resolvers += "Ciroque snapshots 2" at "http://amala.wagner-x.net:8081/nexus/content/repositories/snapshots"
   )
 
   override lazy val settings = super.settings ++ Seq(
@@ -55,8 +62,8 @@ object ApplicationBuild extends Build {
       x => true
     },
     licenses += ("MIT" -> url("http://opensource.org/licenses/MIT")),
-    homepage := Some(url("http://ciroque-x.net/")),
-    scmInfo := Some(ScmInfo(url("http://ciroque-x.net"), "https://github.com/ciroque/securesocial-mongodb-userservice.git")),
+    homepage := Some(url(appHomepage)),
+    scmInfo := Some(ScmInfo(url(appHomepage), "https://github.com/ciroque/securesocial-mongodb-userservice.git")),
 
     // Maven central wants some extra metadata to keep things 'clean'.
     pomExtra := (
